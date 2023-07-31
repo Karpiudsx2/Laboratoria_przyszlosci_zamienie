@@ -9,8 +9,6 @@ from wtforms import StringField, SelectField, SubmitField, HiddenField
 from .functions import *
 from .models import Raport, DeviceUsage, File
 
-os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
-
 sciezka = path.join(getcwd(), "strona", "static", "raportphotos")
 views = Blueprint("views", __name__)
 
