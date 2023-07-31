@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+
+        body {
+            margin: 0;
+            font-size: .9rem;
+            font-weight: 400;
+            line-height: 1.6;
+            color: #212529;
+            text-align: left;
+            background-color: #f5f8fa;
+        }
+
+        .navbar-laravel {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+        }
+
+        .navbar-brand, .nav-link, .my-form, .malfunction-form {
+            font-family: Raleway, sans-serif;
+        }
+
+        .my-form {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .my-form .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .malfunction-form {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .malfunction-form .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    </style>
+    <main class="login-form">
+        <div class="cotainer">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Rejestracja</div>
+                        <div class="card-body">
+                            <form method="POST" action="">
+                                <div class="form-group row">
+                                    {{ form.firstname.label(for="firstname" , class="col-md-4 col-form-label text-md-right") }}
+                                    <div class="col-md-6">
+                                        {{ form.firstname(type="text", id="firstname", class="form-control" ) }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {{ form.lastname.label(for="lastname" , class="col-md-4 col-form-label text-md-right") }}
+                                    <div class="col-md-6">
+                                        {{ form.lastname(type="text", id="lastname", class="form-control" ) }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {{ form.email.label(for="email" , class="col-md-4 col-form-label text-md-right") }}
+                                    <div class="col-md-6">
+                                        {{ form.email(type="text", id="email", class="form-control" ) }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {{ form.subject1.label(for="subject1" , class="col-md-4 col-form-label text-md-right") }}
+                                    <div class="col-md-6">
+                                        {{ form.subject1(id="subject1", class="form-control" ) }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {{ form.password.label(for="password" , class="col-md-4 col-form-label text-md-right") }}
+                                    <div class="col-md-6">
+                                        {{ form.password(id="password", class="form-control" ) }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {{ form.confirm.label(for="confirm" , class="col-md-4 col-form-label text-md-right") }}
+                                    <div class="col-md-6">
+                                        {{ form.confirm(id="confirm", class="form-control" ) }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {{ form.accept_tos.label(for="accept_tos" , class="col-md-4 col-form-label text-md-right", style="vertical-align:middle") }}
+                                    <div class="col-md-6">
+                                        {{ form.accept_tos(id="accept_tos", style="vertical-align:middle") }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6 offset-md-4">
+                                    {{ form.submit(class="btn btn-primary", type="submit") }}
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+{% endblock %}

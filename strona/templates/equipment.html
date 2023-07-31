@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+        h2 {
+            max-width: 50%;
+            margin: 35px;
+        }
+
+        table {
+            display: block;
+            max-width: 80%
+
+        }
+
+
+    </style>
+    <div class="row justify-content-center">
+        <h2>
+            Sprzęt zakupiony w programie Laboratoria Przyszłości
+        </h2><br><br>
+    </div>
+    <div class="row justify-content-center">
+        <p>W tabeli poniżej znajduje się opis sprzętu
+            znajdującego się w naszej placówce, w ramach projektu Laboratoria przyszłości:</p>
+
+        <div class="row justify-content-center">
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">School_id</th>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Opis</th>
+                    <th scope="col">Zdjęcie</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set var = namespace(x=0) %}
+                {% set plik = namespace(nazwa='') %}
+                {% for row, row2, row3, row4 in list %}
+                    {% set var.x= var.x+1 %}
+                    <tr>
+                        <th style="text-align: center; vertical-align: middle;">{{ var.x }}</th>
+                        <td style=" text-align: center; vertical-align: middle;">{{ row }}</td>
+                        <td style=" text-align: center; vertical-align: middle;">{{ row2 }}</td>
+                        <td style=" text-align: center; vertical-align: middle;">{{ row3 }}</td>
+                        <td style=" text-align: center; vertical-align: middle;">
+                            {% if row4 !="/devicephotos/None" %}
+
+                                <img
+                                        src="{{ url_for('static',filename=row4) }}" width="100px" height=auto></td>
+                            {% endif %}
+                    </tr>
+
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>
+        &nbsp;</p>
+    </div>
+    </div>
+{% endblock %}

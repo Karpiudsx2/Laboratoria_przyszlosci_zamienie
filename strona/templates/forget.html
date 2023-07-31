@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Zresetuj hasło</div>
+                    <div class="row justify-content-center">
+                        <p>Podaj maila użytego podczas rejestracji. W ciągu 5 minut zostanie wygenerowany link do zmiany
+                            hasła</p><br>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="POST">
+                            <div class="form-group row">
+                                {{ form.email.label(for="email" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form.email(id="email", class="form-control") }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-4 col-form-label text-md-right">
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form.submit(id="submit", class="btn btn-primary") }}
+                                </div>
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

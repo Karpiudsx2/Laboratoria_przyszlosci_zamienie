@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for raport,deviceusage,device in raports %}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <details>
+                                <summary>
+                                    {{ device.name }}, {{ raport.input_date }}
+                                </summary>
+                                {{ raport.description }}
+                                <br>
+                                <br>
+                                <a href="{{ url_for('views.edit_report', id=raport.id) }}">
+
+                                    <button class="btn btn-secondary"
+                                    >Edytuj &#128220;
+                                    </button>
+                                </a>
+
+                                <a href="{{ url_for('views.confirm', id=raport.id) }}">
+                                    <button class="btn btn-danger" type="submit">Usuń &#128465;
+                                    </button>
+                                </a>
+                            </details>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+

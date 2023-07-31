@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% block content %}
+    <head>
+        <meta charset="UTF-8">
+        <title>graph</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages': ['bar']});
+            google.charts.setOnLoadCallback(drawChartMain);
+
+
+            function drawChartMain() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Urządzenie', 'liczba'],
+                    {% for i in lista %}
+                        ['{{ i[0] }}', {{ i[2] }}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                    animation: {
+                        duration: 1500,
+                        startup: true
+                    },
+                    bars: 'horizontal' // Required for Material Bar Charts.
+                };
+
+                var chart = new google.charts.Bar(document.getElementById('wykres1'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+
+
+            }
+
+        </script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages': ['bar']});
+            google.charts.setOnLoadCallback(drawChartByUser);
+
+            function drawChartByUser() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Imię', 'liczba godzin'],
+                    {% for i in hours_by_user %}
+                        ['{{ i[1] }}', {{ i[2] }}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                    chartArea: {height: 50},
+                    bars: 'horizontal' // Required for Material Bar Charts.
+                };
+
+                var chart = new google.charts.Bar(document.getElementById('wykres2'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+
+
+            }
+        </script>
+
+        <script type="text/javascript">
+            google.charts.load('current', {'packages': ['bar']});
+            google.charts.setOnLoadCallback(drawChartByCategory);
+
+            function drawChartByCategory() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Kategoria', 'liczba godzin'],
+                    {% for i in hours_by_category %}
+                        ['{{ i[0] }}', {{ i[1] }}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                    chartArea: {height: 50},
+                    bars: 'horizontal' // Required for Material Bar Charts.
+                };
+
+                var chart = new google.charts.Bar(document.getElementById('wykres3'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+
+
+            }
+
+
+        </script>
+    </head>
+
+    <div class="row justify-content-center">
+        <h2>Wykorzystanie sprzętu</h2>
+    </div>
+    <br>
+    <div class="row justify-content-center">
+
+        <table class="table table-striped" style="width: 100%; max-width: 800px; table-layout: fixed; display:block">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Nr</th>
+                <th scope="col">Liczba przepracowanych godzin [h]</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set var = namespace(x=0) %}
+            {% for row, row2, row3 in lista %}
+                {% set var.x= var.x+1 %}
+                <tr>
+                    <th scope="row">{{ var.x }}</th>
+                    <td style=" text-align: center; vertical-align: middle;">{{ row }}</td>
+                    <td style=" text-align: center; vertical-align: middle;">{{ row2 }}</td>
+                    <td style=" text-align: center; vertical-align: middle;">{{ row3 }}</td>
+                </tr>
+
+
+            {% endfor %}
+            <tr>
+                <th scope="row"></th>
+                <td style=" text-align: center; vertical-align: middle;"></td>
+                <td style=" text-align: center; vertical-align: middle;"><strong>Suma</strong></td>
+                <td style=" text-align: center; vertical-align: middle;"><strong>{{ suma }}</strong></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="row justify-content-center">
+        <h2>Liczba zgłoszonych godzin</h2>
+    </div>
+    <br>
+    <div class="row justify-content-center">
+        <table class="table table-striped" style="max-width: 800px; table-layout: auto; display:block">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Imię</th>
+                <th scope="col">Liczba zgłoszonych godzin [h]</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set var = namespace(y=0) %}
+            {% for row, row1, row2 in hours_by_user %}
+                {% set var.y= var.y+1 %}
+                <tr>
+                    <th scope="row">{{ var.y }}</th>
+                    <td style=" text-align: center; vertical-align: middle;">{{ row1 }}</td>
+                    <td style=" text-align: center; vertical-align: middle;">{{ row2 }}</td>
+
+                </tr>
+
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row justify-content-center">
+        <h2>Liczba zgłoszonych godzin według kategorii</h2>
+    </div>
+    <br>
+    <div class="row justify-content-center">
+        <table class="table table-striped" style="max-width: 800px; table-layout: auto; display:block">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Imię</th>
+                <th scope="col">Liczba zgłoszonych godzin [h]</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set var = namespace(y=0) %}
+            {% for row, row1  in hours_by_category %}
+                {% set var.y= var.y+1 %}
+                <tr>
+                    <th scope="row">{{ var.y }}</th>
+                    <td style=" text-align: center; vertical-align: middle;">{{ row }}</td>
+                    <td style=" text-align: center; vertical-align: middle;">{{ row1 }}</td>
+
+                </tr>
+
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row justify-content-center">
+        <h2>Wykresy</h2>
+    </div>
+    <br>
+    <div class="panel">
+        <br><br>
+        <div id="wykres1" style="width:40%"></div>
+    </div>
+    <br><br>
+    <div class="panel">
+        <br><br>
+        <div id="wykres2" style="margin-left: 80px; width:40%" ,></div>
+    </div>
+    <div class="panel">
+        <br><br>
+        <div id="wykres3" style="margin-left: 50px; width:40%" ,></div>
+    </div>
+
+
+
+
+{% endblock %}
+

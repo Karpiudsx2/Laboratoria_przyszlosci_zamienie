@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+
+        body {
+            margin: 0;
+            font-size: .9rem;
+            font-weight: 400;
+            line-height: 1.6;
+            color: #212529;
+            text-align: left;
+            background-color: #f5f8fa;
+        }
+
+        .navbar-laravel {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+        }
+
+        .navbar-brand, .nav-link, .my-form, .malfunction-form {
+            font-family: Raleway, sans-serif;
+        }
+
+        .my-form {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .my-form .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .malfunction-form {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .malfunction-form .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    </style>
+    <main class="malfunction-form">
+        <div class="cotainer">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Zgłoś awarię sprzętu</div>
+                        <div class="card-body">
+                            <form method="POST">
+                                <form method="POST" action="">
+                                    <div class="form-group row">
+                                        {{ form.person.label(for="person" , class="col-md-4 col-form-label text-md-right") }}
+                                        <div class="col-md-6">
+                                            {{ form.person(type="text", id="person", class="form-control") }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        {{ form.sala.label(for="sala" , class="col-md-4 col-form-label text-md-right") }}
+                                        <div class="col-md-6">
+                                            {{ form.sala(type="text", id="sala", class="form-control" ) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        {{ form.description.label(for="description" , class="col-md-4 col-form-label text-md-right") }}
+                                        <div class="col-md-6">
+                                            {{ form.description(type="text", id="description", class="form-control", rows="10" ) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 offset-md-4">
+                                        {{ form.submit(class="btn btn-primary", type="submit") }}
+                                    </div>
+
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+{% endblock %}

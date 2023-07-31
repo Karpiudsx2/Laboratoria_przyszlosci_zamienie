@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Użytkownik</th>
+            <th scope="col">Data</th>
+            <th scope="col">Urządzenie</th>
+            <th scope="col">Liczba godzin [h]</th>
+            <th scope="col">Temat w dzienniku</th>
+            <th scope="col">Opis</th>
+            <th scope="col">Zdjęcie</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set var = namespace(x=0) %}
+        {% for  raport, deviceusage, device, user in raports %}
+            {% set var.x= var.x+1 %}
+            <tr>
+                <td style=" text-align: center; vertical-align: middle;">{{ var.x }}</td>
+                <td style=" text-align: center; vertical-align: middle;">{{ user.firstname }} {{ user.lastname }}</td>
+                <td style=" text-align: center; vertical-align: middle;">{{ raport.class_date }}</td>
+                <td style=" text-align: center; vertical-align: middle;">{{ device.name }}</td>
+                <td style=" text-align: center; vertical-align: middle;">{{ deviceusage.working_hours }}</td>
+                <td style=" text-align: center; vertical-align: middle;">{{ raport.reference }}</td>
+                <td style=" text-align: center; vertical-align: middle;">{{ raport.description }}</td>
+                <td style=" text-align: center; vertical-align: middle;">
+                    {% for file in files %}
+                        {% if file.raport_id == raport.id %}
+                            <img src="{{ url_for("static", filename="raportphotos/" + file.filename) }}"
+                                 height="100px"
+                                 width="100px">
+                        {% endif %}
+                    {% endfor %}
+                </td>
+
+            </tr>
+
+
+        {% endfor %}
+
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

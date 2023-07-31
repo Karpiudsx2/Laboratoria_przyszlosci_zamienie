@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <main class="confirmation-post">
+        <div class="cotainer">
+            <div class="row justify-content-center">
+
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header" style="text-align:center">Czy na pewno chcesz usunąć raport?. Dane
+                            zostaną bezpowrotnie skasowane!
+
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                                <a href="{{ url_for('views.myraports') }}">
+
+                                    <button class="btn btn-secondary"
+                                    >Nie &#128220;
+                                    </button>
+                                </a>
+
+                                <a href="{{ url_for('views.delete_raport', id=id) }}">
+                                    <button class="btn btn-danger" type="submit">Usuń &#128465;
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+        .malfunction-form {
+            font-family: Raleway, sans-serif;
+        }
+
+        .malfunction-form {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .malfunction-form .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    </style>
+
+
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Użytkownik</div>
+                    <div class="card-body">
+                        <form method="POST" action="/editdata">
+                            <div class="form-group row">
+                                {{ form.firstname.label(for="firstname" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form.firstname(type="text", id="firstname", class="form-control", value= user.firstname ) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ form.lastname.label(for="lastname" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form.lastname(type="text", id="lastname", class="form-control",value= user.lastname ) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ form.email.label(for="email" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form.email(type="text", id="email", class="form-control", value=user.email) }}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 offset-md-4">
+                                {{ form.submit(class="btn btn-primary", type="submit") }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cotainer">
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Informacje o nauczanym przedmiocie</div>
+                    <div class="card-body">
+                        <form method="POST" action="/editdata">
+                            <div class="form-group row">
+                                {{ form2.subject1.label(for="subject1" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form2.subject1(id="subject1", class="form-control", value=user.subject1) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ form2.subject2.label(for="subject2" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form2.subject2(id="subject2", class="form-control", value=user.subject2 ) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ form2.subject3.label(for="subject3" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form2.subject3(id="subject3", class="form-control", value=user.subject3 ) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 offset-md-4">
+                                {{ form2.submit(class="btn btn-primary", type="submit") }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="cotainer">
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Dodaj rozkłady tematów</div>
+                    <div class="card-body">
+                        <form method="POST" action="/editdata" enctype="multipart/form-data">
+                            <p style="text-align:center" target="blank">Wykaz podręczikow dopuszczonych do nauczania
+                                znajduje się na: <a href="https://podreczniki.men.gov.pl/">link</a></p>
+                            <div class="form-group row">
+                                {{ form3.przedmiot.label(for="przedmiot" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form3.przedmiot(id="przedmiot", class="form-control" ) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ form3.grade.label(for="grade" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form3.grade(id="grade", class="form-control") }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ form3.name.label(for="name" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form3.name(id="name", class="form-control" ) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ form3.wydawnictwo.label(for="wydawnictwo" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form3.wydawnictwo(id="wydawnictwo", class="form-control" ) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ form3.plik.label(for="plik" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form3.plik(id="plik", class="form-control") }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 offset-md-4">
+                                {{ form3.submit(class="btn btn-primary", type="submit") }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Zmień hasło</div>
+                    <div class="card-body">
+                        <form method="POST" action="/editdata">
+                            {% for field, errors in form3.errors.items() %}
+
+                                <div class="alert alert-danger" role="alert">
+                                    {{ ', '.join(errors) }}
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <span aria-hidden="true">&times</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group row">
+                                {{ form4.current_password.label(for="current_password" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form4.current_password(id="current_password", class="form-control" ) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ form4.password.label(for="password" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form4.password(id="password", class="form-control" ) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ form4.confirm.label(for="confirm" , class="col-md-4 col-form-label text-md-right") }}
+                                <div class="col-md-6">
+                                    {{ form4.confirm(id="confirm", class="form-control" ) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 offset-md-4">
+                                {{ form4.submit(class="btn btn-primary", type="submit") }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

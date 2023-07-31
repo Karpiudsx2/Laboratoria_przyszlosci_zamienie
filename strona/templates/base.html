@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+
+    <meta charset="UTF-8">
+    <title>{% block title %} Tytuł strony {% endblock %} </title>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+    />
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous"
+    />
+    <style>
+        #page-container {
+            min-height: 100vh;
+            position: relative;
+        }
+    </style>
+
+    <script src="jquery-3.6.0.min.js"></script>
+
+
+</head>
+<body>
+<div id="navbar">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <img src="{{ url_for('static',filename='Logo.png') }}" width="70px" height="70px">
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url_for('views.home') }}">Home <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url_for('views.equipment') }}">Sprzęt</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Raport</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ url_for('views.myraports') }}">Moje Raporty</a>
+                            <a class="dropdown-item" href="{{ url_for('views.report') }}">Zaraportuj</a>
+                            {% if user.is_admin or user.is_managment %}
+                                <a class="dropdown-item" href="{{ url_for('views.raporty') }}">Raporty</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url_for('views.usage') }}">Użycie sprzętu</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url_for('mal.malfunction') }}">Zgłoś awarię</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            Użytkownik
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ url_for('views.editdata') }}">Edytuj dane</a>
+                            <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Wyloguj</a>
+
+                        </div>
+                        {#                    <li class="nav-item ">#}
+                        {#                        <a class="nav-link" href="{{ url_for('admin.index') }}">Admin</a>#}
+                        {#                    </li>#}
+                        {#                    <li class="nav-item ">#}
+                    </ul>
+                    </div>
+                {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url_for('auth.signup') }}">Zarejestruj <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.login') }}">Zaloguj</a>
+                    </li>
+                {% endif %}
+    </nav>
+</div>
+<div id="page-container" style="padding-top: 90px">
+    <div id="massages">
+        {% with massage = get_flashed_messages(category_filter=["error"]) %}
+            {% if massage %}
+                <div class="alert alert-danger" role="alert">
+                    {{ massage[-1] }}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% with massage = get_flashed_messages(category_filter=["success"]) %}
+            {% if massage %}
+                <div class="alert alert-success" role="alert">
+                    {{ massage[-1] }}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% with massage = get_flashed_messages(category_filter=["warning"]) %}
+            {% if massage %}
+                <div class="alert alert-warning" role="warning">
+                    {{ massage[-1] }}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    {% block content %}
+
+        <H1>To jest strona domowa projektu</H1>
+    {% endblock %}
+</div>
+<div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-left">
+            <img src="{{ url_for('static',filename='Logo_footer.png') }}" width="100px" height="100px">
+            </a>
+        </div>
+        <div class="col-md-4 d-flex align-items-center">
+            <span class="text-muted" style="text-align:center">&copy; Szkoła Podstawowa w Zamieniu </span>
+        </div>
+
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><img src="{{ url_for("static",filename="laboratoria.png") }}" width="100" height="100">
+            </li>
+        </ul>
+    </footer>
+</div>
+
+
+<script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"
+></script>
+<script type="text/javascript"
+        src="{{ url_for('static',filename="js/myfile.js") }}">
+
+</script>
+</body>
+</html>
