@@ -9,6 +9,7 @@ from wtforms import StringField, SelectField, SubmitField, HiddenField
 from .functions import *
 from .models import Raport, DeviceUsage, File
 
+# przy uplodowaniu na pythonanywhere trzeba tą ściężkę poprawić
 sciezka = path.join(getcwd(), "strona", "static", "raportphotos")
 views = Blueprint("views", __name__)
 
