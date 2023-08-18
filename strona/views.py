@@ -279,7 +279,6 @@ def editdata():
 @login_required
 def usage():
     suma = SummaryUsage()
-    print(suma.count_hours_by_category())
     return render_template("usage.html", user=current_user, hours_by_user=suma.count_hours_by_user(),
                            hours_by_category=suma.count_hours_by_category(), lista=suma.summary(),
                            count=suma.list_length(),

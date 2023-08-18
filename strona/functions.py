@@ -268,8 +268,16 @@ class SummaryUsage:
         return suma
 
     def count_hours_by_user(self):
-        return db.session.query(Raport.user_id, User.firstname, func.sum(DeviceUsage.working_hours)).join(User).join(
+        list = db.session.query(Raport.user_id, User.firstname, DeviceUsage.working_hours).join(User).join(
             DeviceUsage).all()
+        sum_list = []
+        # tworzenie listy kategorii
+        for element in list:
+            if element[0] not in sum_list:
+                sum_list.append()
+
+        print(list)
+        return list
 
     def count_hours_by_category(self):
         lista = db.session.query(Kategoria.category_name, DeviceUsage.working_hours).select_from(
